@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>d3.js Visualization</title>
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+	
+</head>
+<body>
+	<script>
+		console.log(d3);  
+		
+		var data = [10];
+		var width = 500;
+		var height = 500;
+		
+		var canvas = d3.select("body")
+						.append("svg")
+						.attr("width", width)
+						.attr("height", height);
+						
+		var circle = canvas.append("circle")
+						.attr("cx", 50)
+						.attr("cy", 50)
+						.attr("r", 25);
+		
+		circle.transition()
+					.duration(1500)
+					.attr("cx", 150)
+					.transition()
+						.attr("cy", 200)
+						.transition()
+							.attr("cx", 50)
+							.transition()
+								.attr("cy", 50);
+				//.delay(2000)
+				//.attr("cx", 150)
+				//.attr("cy", 150);
+						
+		/* var circle2 = canvas.append("circle")
+						.attr("cx", 50)
+						.attr("cy", 200)
+						.attr("r", 25); */
+		
+		/* var circles = canvas.selectAll("circle")
+						.data(data)
+						.attr("fill","red")
+						.enter()
+							.append("circle")
+							.attr("cx", 50)
+							.attr("cy", 50)
+							.attr("fill","green")
+							.attr("r", 25 */
+
+		/* var circles = canvas.selectAll("circle")
+						.data(data)
+						.attr("fill","green")
+						.exit()
+							.attr("fill","blue");
+		*/
+	</script>
+</body>
+</html>
