@@ -8,7 +8,34 @@
     </section>
     <h1 class="post-title">Building a blog using Jekyll. Creating custom layouts</h1>
     <article class="post-content">
-      {{content}}
+	      <script>
+			console.log(d3);  
+			
+			var data = [10];
+			var width = 500;
+			var height = 500;
+			
+			var canvas = d3.select("body")
+							.append("svg")
+							.attr("width", width)
+							.attr("height", height);
+							
+			var circle = canvas.append("circle")
+							.attr("cx", 50)
+							.attr("cy", 50)
+							.attr("r", 25);
+			
+			circle.transition()
+						.duration(1500)
+						.attr("cx", 150)
+						.transition()
+							.attr("cy", 200)
+							.transition()
+								.attr("cx", 50)
+								.transition()
+									.attr("cy", 50);
+	
+		</script>
     </article>
 </body>
 	{% include footer.html %}
