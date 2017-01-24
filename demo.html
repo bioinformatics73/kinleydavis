@@ -17,7 +17,7 @@
 			
 			canvas.selectAll("rect").data( data )
 				.enter().append("rect")
-					.attr("width", function( d ) { return d.THOUSAND MILLION BARRELS * 10; })
+					.attr("width", function( d ) { return d.YEAR * 10; })
 				  	.attr("height", 48)
 				  	.attr("y", function( d, i ) { return i * 50; })
 				  	.attr("fill", "blue");
