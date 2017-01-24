@@ -17,8 +17,8 @@
 			
 			canvas.selectAll("rect").data( data )
 				.enter().append("rect")
-					.attr("width", function( d ) { return d.barrels; })
-				  	.attr("height", 48)
+					.attr("width", function( d ) { return d.barrels * 10; })
+				  	.attr("height", 5)
 				  	.attr("y", function( d, i ) { return i * 50; })
 				  	.attr("fill", "blue");
 		});
