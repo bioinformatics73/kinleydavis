@@ -9,7 +9,7 @@
 	<script>
 		console.log(d3);
 		
-		d3.json("data/json/mydata.json", function( data ) {
+		d3.json("data/json/us.json", function( data ) {
 			
 			var canvas = d3.select("body").append("svg")
 				.attr("width", 2000)
@@ -17,7 +17,7 @@
 			
 			canvas.selectAll("rect").data( data )
 				.enter().append("rect")
-					.attr("width", function( d ) { return d.year * 10; })
+					.attr("width", function( d ) { return d.barrels * 10; })
 				  	.attr("height", 48)
 				  	.attr("y", function( d, i ) { return i * 50; })
 				  	.attr("fill", "blue");
