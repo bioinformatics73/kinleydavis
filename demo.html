@@ -9,6 +9,21 @@
 	<script>
 		console.log(d3);
 		
+		d3.json("/data/json/us.json", function( data ) {
+			
+			var canvas = d3.select("body").append("svg")
+				.attr("width", 500)
+				.attr("height", 500);
+			
+			canvas.selectAll("rect").data( data )
+				.enter().append("rect")
+					.attr("width", function( d ) { return d.THOUSAND MILLION BARRELS * 10; })
+				  	.attr("height", 48)
+				  	.attr("y", function( d, i ) { return i * 50; })
+				  	.attr("fill", "blue")
+		});
+		
+	/*
 		var data = [10];
 		var width = 500;
 		var height = 500;
@@ -32,22 +47,7 @@
 							.attr("cx", 50)
 							.transition()
 								.attr("cy", 50);
-		
-		/*
-		d3.json("data/json/us.json", function( data ) {
-			
-			var canvas = d3.select("body").append("svg")
-				.attr("width", 500)
-				.attr("height", 500);
-			
-			canvas.selectAll("rect").data( data )
-				.enter().append("rect")
-					.attr("width", function( d ) { return d.THOUSAND MILLION BARRELS * 10; })
-				  	.attr("height", 48)
-				  	.attr("y", function( d, i ) { return i * 50; })
-				  	.attr("fill", "blue")
-		});
-		*/
+	*/
 		
 	</script>
 </body>
