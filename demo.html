@@ -12,7 +12,7 @@
 		d3.json("data/json/mydata.json", function( data ) {
 			
 			var canvas = d3.select("body").append("svg")
-				.attr("width", 500)
+				.attr("width", 2000)
 				.attr("height", 500);
 			
 			canvas.selectAll("rect").data( data )
