@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
 	<title>d3.js Visualization</title>
 	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.4.4/d3.min.js"></script>
@@ -10,14 +11,14 @@
 		console.log(d3);  
 		
 		var scale = d3.scale.linear()
-        .domain([1, 5])   // Data space
-        .range([0, 200]); // Pixel space
+        				.domain([1, 5])   // Data space
+        				.range([0, 200]); // Pixel space
 
-      var svg = d3.select("body").append("svg")
-        .attr("width",  250)
-        .attr("height", 250);
+      	var svg = d3.select("body").append("svg")
+        				.attr("width",  250)
+        				.attr("height", 250);
 
-      function render(data, color){
+      	function render(data, color){
 
         // Bind data
         var rects = svg.selectAll("rect").data(data);
@@ -41,70 +42,6 @@
       render([1, 2, 3, 4, 5], "blue"); 
       render([1, 2],          "green");
 		
-<!--		
-		var data = [10];
-		var width = 500;
-		var height = 500;
-		
-		var canvas1 = d3.select("body")
-						.append("svg")
-						.attr("width", width)
-						.attr("height", height);
-						
-		var circle = canvas1.append("circle")
-						.attr("cx", 50)
-						.attr("cy", 50)
-						.attr("r", 25);
-		
-		circle.transition()
-					.duration(1500)
-					.attr("cx", 150)
-					.transition()
-						.attr("cy", 200)
-						.transition()
-							.attr("cx", 50)
-							.transition()
-								.attr("cy", 50);
--->								
-								
-		<!-- Container to create SVG objects -->
-<!--
-		var dataArray = [5, 40, 50, 60];
-		var w = 500;
-		var h = 500;
-		
-		var widthScale = d3.scale.linear()
-							.domain([0, 60])
-							.range([0, w]);
-		
-		var color = d3.scale.linear()
-						.domain([0, 60])
-						.range(["red", "blue"]);
-						
-		var axis = d3.svg.axis()
-						.ticks(5)
-						.scale(widthScale);
-		
-		var canvas2 = d3.select("body")
-						.append("svg")
-						.attr("width", w)
-						.attr("height", h)
-						.append("g")
-						.attr("transform", "translate(20, 0)");
-		
-		var bars = canvas2.selectAll("rect") // Create empty rectangles
-						.data(dataArray) // Grab data from the variable
-						.enter() // Placeholder for each data element in the array
-							.append("rect")
-							.attr("width", function(d) { return widthScale(d); }) 
-							.attr("height", 50)
-							.attr("fill", function(d) { return color(d) })
-							.attr("y", function(d, i) { return i * 100 });
-							
-		canvas2.append("g")
-				.attr("transform", "translate(0, 400)")
-				.call(axis);
--->
 	</script>
 </body>
 </html>
