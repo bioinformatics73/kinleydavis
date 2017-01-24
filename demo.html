@@ -4,21 +4,23 @@
 	<meta charset="utf-8">
 	<title>d3.js Visualization</title>
 	<script src="https://d3js.org/d3.v4.min.js"></script>
-	<style>.states{fill: none; stroke: #fff; stroke-linejoin: round;}</style>
 </head>
 <body>
 	<script>
 		console.log(d3);
 		
-		d3.json("data/json/us.json", function(data) {
+		d3.json("data/json/us.json", function( data ) {
 			
-			var canvas = d3.select("body").append("svg").attr("width", 500).attr("height", 500);
+			var canvas = d3.select("body").append("svg")
+				.attr("width", 500)
+				.attr("height", 500);
 			
-			canvas.selectAll("rect").data(data)
-				  .enter().append("rect").attr("width", function(d) { return d.year * 10; })
-				  	.attr("height", 50)
-				  		.attr("y", function(d, i) { return i * 50; })
-				  		.attr("fill", "blue")
+			canvas.selectAll("rect").data( data )
+				.enter().append("rect")
+					.attr("width", function( d ) { return d.THOUSAND MILLION BARRELS * 10; })
+				  	.attr("height", 48)
+				  	.attr("y", function( d, i ) { return i * 50; })
+				  	.attr("fill", "blue")
 		});
 		
 	</script>
