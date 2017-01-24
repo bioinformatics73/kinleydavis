@@ -2,13 +2,46 @@
 <html>
 <head>
 	<title>d3.js Visualization</title>
-	<script src="https://d3js.org/d3.v3.min.js"></script>
+	<script src="https://d3js.org/d3.v4.min.js"></script>
 	
 </head>
 <body>
 	<script>
 		console.log(d3);  
 		
+		var scale = d3.scale.linear()
+        .domain([1, 5])   // Data space
+        .range([0, 200]); // Pixel space
+
+      var svg = d3.select("body").append("svg")
+        .attr("width",  250)
+        .attr("height", 250);
+
+      function render(data, color){
+
+        // Bind data
+        var rects = svg.selectAll("rect").data(data);
+        
+        // Enter
+        rects.enter().append("rect")
+          .attr("y", 50)
+          .attr("width",  20)
+          .attr("height", 20);
+
+        // Update
+        rects
+          .attr("x", scale)
+          .attr("fill", color);
+
+        // Exit
+        rects.exit().remove();
+      }
+
+      render([1, 2, 2.5],     "red");
+      render([1, 2, 3, 4, 5], "blue"); 
+      render([1, 2],          "green");
+		
+<!--		
 		var data = [10];
 		var width = 500;
 		var height = 500;
@@ -32,9 +65,10 @@
 							.attr("cx", 50)
 							.transition()
 								.attr("cy", 50);
-								
+-->								
 								
 		<!-- Container to create SVG objects -->
+<!--
 		var dataArray = [5, 40, 50, 60];
 		var w = 500;
 		var h = 500;
@@ -70,6 +104,7 @@
 		canvas2.append("g")
 				.attr("transform", "translate(0, 400)")
 				.call(axis);
+-->
 	</script>
 </body>
 </html>
