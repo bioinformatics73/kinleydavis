@@ -8,7 +8,7 @@
 <body>
 	<script>
 		console.log(d3);
-		
+	/*
 		d3.json("data/json/us.json", function( data ) {
 			
 			var canvas1 = d3.select("body").append("svg")
@@ -28,12 +28,13 @@
 					.text(function (d) { return d.barrels; })
 					.attr("fill", "white");
 		});
+	*/
 		
 		d3.json("data/json/us.json", function( data2 ) {
 			
 			var canvas2 = d3.select("body").append("svg")
-				.attr("width", 2000)
-				.attr("height", 2000);
+				.attr("width", 500)
+				.attr("height", 500);
 			
 			var data2 = [
 				{x: 10, y: 20},
@@ -55,7 +56,7 @@
 				.append("path")
 				.attr("d", line)
 				.attr("fill", "none")
-				.attr("stroke", "#000")
+				.attr("stroke", "black")
 				.attr("stroke-width", 10);
 		});
 		
