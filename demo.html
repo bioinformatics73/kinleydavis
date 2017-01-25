@@ -7,12 +7,17 @@
 </head>
 <body>
 	<script>
-		// console.log(d3);
 		
-		d3.json("data/json/us.json", function( data ) {
+		// d3.json("data/json/us.json", function( data ) {
 			
 			// var data = "data/json/us.json";
-			// var data = [10, 50, 80];
+			var data = [36.5, 36.5, 35.1, 35.6, 36.1, 36.4, 
+						35.1, 35.4, 35.1, 34.3, 33.8, 32.1, 
+						31.2, 30.2, 29.6, 29.8, 29.8, 30.5, 
+						28.6, 29.7, 30.4, 30.4, 30.7, 29.4, 
+						29.3, 29.9, 29.4, 30.5, 28.4, 30.9, 
+						35, 39.8, 44.2, 48.5, 55, 55];
+			
 			var r = 300;
 			
 			var canvas = d3.select("body").append("svg")
@@ -38,9 +43,11 @@
 			arcs.append("path")
 					.attr("d", arc);
 			
-		});
+		// });
 		
 	/*
+		console.log(d3);
+	
 		d3.json("data/json/us.json", function( data ) {
 			
 			var canvas1 = d3.select("body").append("svg")
