@@ -52,48 +52,48 @@
 		// });
 	*/
 		
-			var data2 = [36.5, 36.5, 35.1, 35.6, 36.1, 36.4, 
+			var data = [36.5, 36.5, 35.1, 35.6, 36.1, 36.4, 
 						 35.1, 35.4, 35.1, 34.3, 33.8, 32.1, 
 						 31.2, 30.2, 29.6, 29.8, 29.8, 30.5, 
 						 28.6, 29.7, 30.4, 30.4, 30.7, 29.4, 
 						 29.3, 29.9, 29.4, 30.5, 28.4, 30.9, 
 						 35, 39.8, 44.2, 48.5, 55, 55];
 	
-			var r2 = 300;
+			var r = 300;
 			
-			var color2 = d3.scaleOrdinal()
+			var color = d3.scaleOrdinal()
 							.domain([0, 60])
 							.range(["red", "blue", "orange"]);
 			
-			var canvas2 = d3.select("body").append("svg")
+			var canvas = d3.select("body").append("svg")
 							.attr("width", 1500)
 							.attr("height", 1500);
 			
-			var group2 = canvas2.append("g")
+			var group = canvas.append("g")
 							.attr("transform", "translate(300, 300)");
 			
-			var arc2 = d3.arc()
-						.innerRadius(r2)
-						.outerRadius(r2);
+			var arc = d3.arc()
+						.innerRadius(r)
+						.outerRadius(r);
 			
-			var pie2 = d3.pie()
-						.value(function (d2) { return d2; });
+			var pie = d3.pie()
+						.value(function (d) { return d; });
 			
-			var arcs2 = group2.selectAll(".arc")
-							.data( pie2( data2 ) )
+			var arcs = group.selectAll(".arc")
+							.data( pie( data ) )
 							.enter()
 							.append("g")
 							.attr("class", "arc");
 			
-			arcs2.append("path")
-					.attr("d", arc2)
-					.attr("fill", function (d2) { return color2 (d2.data2); });
+			arcs.append("path")
+					.attr("d", arc)
+					.attr("fill", function (d) { return color (d.data); });
 			
-			arcs2.append("text")
-				.attr("transform", function (d2) { return "translate(" + arc2.centroid(d2) + ")"; })
+			arcs.append("text")
+				.attr("transform", function (d) { return "translate(" + arc.centroid(d) + ")"; })
 				.attr("text-anchor", "middle")
 				.attr("font-size", "1.5em")
-				.text( function (d2) { return d2.data2; });
+				.text( function (d) { return d.data; });
 	
 		// console.log(d3);
 	
