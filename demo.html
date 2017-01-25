@@ -44,7 +44,7 @@
 			var group = canvas2.append("g")
 							.attr("transform", "translate(100, 100)");
 			
-			var line = d3.svg.line()
+			var line = canvas2.line()
 							.x( function (d) { return d.x; })
 							.y( function (d) { return d.y; });
 			
