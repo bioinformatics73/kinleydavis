@@ -20,7 +20,7 @@
 			
 			var r = 300;
 			
-			var color = d3.scale.ordinal()
+			var color = d3.scaleOrdinal()
 							.domain([0, 60])
 							.range(["red", "blue", "orange"]);
 			
@@ -43,14 +43,6 @@
 							.enter()
 							.append("g")
 							.attr("class", "arc");
-			
-			/* 
-			canvas.selectAll("text").data(data)
-				.enter().append("text")
-					// .attr("y", function ( d, i ) { return i * 50 + 24; })
-					.text(function (d) { return d; })
-					.attr("fill", "white");
-			*/
 			
 			arcs.append("path")
 					.attr("d", arc)
