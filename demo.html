@@ -13,17 +13,17 @@
 			
 			//var data = "data/json/us.json";
 			var data = [10, 50, 80];
-			var r = 300;
+			var r = 200;
 			
 			var canvas = d3.select("body").append("svg")
 							.attr("width", 1500)
 							.attr("height", 1500);
 			
 			var group = canvas.append("g")
-							.attr("transform", "translate(300, 300)");
+							.attr("transform", "translate(200, 200)");
 			
 			var arc = d3.arc()
-					.innerRadius(200)
+					.innerRadius(100)
 					.outerRadius(r);
 			
 			var pie = d3.pie()
