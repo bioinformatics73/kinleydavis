@@ -20,6 +20,10 @@
 			
 			var r = 300;
 			
+			var color = d3.scale.ordinal()
+							.domain([0, 60])
+							.range(["red", "blue", "orange"]);
+			
 			var canvas = d3.select("body").append("svg")
 							.attr("width", 1500)
 							.attr("height", 1500);
@@ -40,14 +44,17 @@
 							.append("g")
 							.attr("class", "arc");
 			
+			/* 
 			canvas.selectAll("text").data(data)
 				.enter().append("text")
 					// .attr("y", function ( d, i ) { return i * 50 + 24; })
 					.text(function (d) { return d; })
 					.attr("fill", "white");
+			*/
 			
 			arcs.append("path")
-					.attr("d", arc);
+					.attr("d", arc)
+					.attr("fill", function (d) { return color (d.data); });
 			
 		// });
 		
