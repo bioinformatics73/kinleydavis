@@ -38,7 +38,9 @@
 							.data( pie( data ) )
 							.enter()
 							.append("g")
-							.attr("class", "arc");
+							.attr("class", "arc")
+							.text(function (d) { return d; })
+							.attr("fill", "white");
 			
 			arcs.append("path")
 					.attr("d", arc);
