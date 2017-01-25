@@ -11,22 +11,52 @@
 		
 		d3.json("data/json/us.json", function( data ) {
 			
-			var canvas = d3.select("body").append("svg")
+			var canvas1 = d3.select("body").append("svg")
 				.attr("width", 2000)
 				.attr("height", 2000);
 			
-			canvas.selectAll("rect").data( data )
+			canvas1.selectAll("rect").data( data )
 				.enter().append("rect")
 					.attr("width", function( d ) { return d.barrels * 10; })
 				  	.attr("height", 48)
 				  	.attr("y", function( d, i ) { return i * 50; })
 				  	.attr("fill", "blue");
 			
-			canvas.selectAll("text").data(data)
+			canvas1.selectAll("text").data(data)
 				.enter().append("text")
 					.attr("y", function ( d, i ) { return i * 50 + 24; })
 					.text(function (d) { return d.barrels; })
 					.attr("fill", "white");
+		});
+		
+		d3.json("data/json/us.json", function( data2 ) {
+			
+			var canvas2 = d3.select("body").append("svg")
+				.attr("width", 2000)
+				.attr("height", 2000);
+			
+			var data2 = [
+				(x: 10, y: 20),
+				(x: 40, y: 60),
+				(x: 50, y: 70)
+			];
+			
+			var group = canvas2.append("g")
+							.attr("transform", "translate(100, 100)");
+			
+			var line = d3.svg.line()
+							.x(function(d) [ return d.x; ])
+							.y(function (d) [ return d.y; ]);
+			
+			
+			group.selectAll("path")
+				.data([data2])
+				.enter()
+				.append("path")
+				.attr("d", line)
+				.attr("fill", "none")
+				.attr("stroke", "#000")
+				.attr("stroke-width", 10);
 		});
 		
 	</script>
