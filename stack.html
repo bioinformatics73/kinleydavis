@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>d3.js Data Visualization</title>
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+<body>
+	<script>
+		var l = 6;
+		var s = 13;
+			
+		var margin = { top: 20, right: 50, bottom: 100, left: 75 },
+			width = 740 - margin.left - margin.right,
+			height = 500 - margin.top - margin.bottom;
+			
+		var svg = d3.select("#chart-svg").append("svg")
+					.attr("width", width + margin.left + margin.right)
+					.attr("height", height + margin.top + margin.bottom)
+					.append("g")
+					.attr("transform", "translate(" + margin.left + "," + margin.top + ")" );
+			
+		d3.json("data/json/us.json" function( data ) {
+			
+			var h = ["Thousand Million Barrels"];
+			
+			var layers = d3.stack()(headers.map( function( range ) {
+				return data.map( function( d ) {
+					return {x: d.barrels, y: +d[ range] };
+			});
+		}));
+			
+		console.log( layers );
+		
+			
+		
+	</script>
+</body>
+</html>
