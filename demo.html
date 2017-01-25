@@ -9,9 +9,9 @@
 	<script>
 		console.log(d3);
 		
-		//d3.json("data/json/us.json", function( data ) {
+		d3.json("data/json/us.json", function( data ) {
 			
-			var data = d3.json("data/json/us.json");
+			// var data = "data/json/us.json";
 			// var data = [10, 50, 80];
 			var r = 300;
 			
@@ -30,7 +30,7 @@
 						.value(function (d) { return d; });
 			
 			var arcs = group.selectAll(".arc")
-							.data(pie(data))
+							.data( pie( data ) )
 							.enter()
 							.append("g")
 							.attr("class", "arc");
