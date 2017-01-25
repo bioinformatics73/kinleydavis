@@ -57,7 +57,7 @@
 						 29.3, 29.9, 29.4, 30.5, 28.4, 30.9, 
 						 35, 39.8, 44.2, 48.5, 55, 55];
 	
-			var r = 300;
+			var r2 = 300;
 			
 			var color2 = d3.scaleOrdinal()
 							.domain([0, 60])
@@ -67,31 +67,31 @@
 							.attr("width", 1500)
 							.attr("height", 700);
 			
-			var group = canvas2.append("g")
+			var group2 = canvas2.append("g")
 							.attr("transform", "translate(300, 300)");
 			
-			var arc = d3.arc()
-					.innerRadius(r)
-					.outerRadius(r);
+			var arc2 = d3.arc()
+						.innerRadius(r2)
+						.outerRadius(r2);
 			
-			var pie = d3.pie()
-						.value(function (d) { return d; });
+			var pie2 = d3.pie()
+						.value(function (d2) { return d2; });
 			
-			var arcs = group.selectAll(".arc")
+			var arcs2 = group2.selectAll(".arc")
 							.data( pie( data2 ) )
 							.enter()
 							.append("g")
 							.attr("class", "arc");
 			
-			arcs.append("path")
-					.attr("d", arc)
-					.attr("fill", function (d) { return color2 (d.data2); });
+			arcs2.append("path")
+					.attr("d", arc2)
+					.attr("fill", function (d2) { return color2 (d2.data2); });
 			
-			arcs.append("text")
-				.attr("transform", function (d) { return "translate(" + arc.centroid(d) + ")"; })
+			arcs2.append("text")
+				.attr("transform", function (d2) { return "translate(" + arc2.centroid(d2) + ")"; })
 				.attr("text-anchor", "middle")
 				.attr("font-size", "1.5em")
-				.text( function (d) { return d.data2; });
+				.text( function (d2) { return d2.data2; });
 	
 		// console.log(d3);
 	
