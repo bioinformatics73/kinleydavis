@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Step 6 - Animating Interactivity</title>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
     <link rel="stylesheet" href="https://bioinformatics73.github.io/Bluemix-IoT-Visualizations/css/normalize.css">
     <style>
       #chart {
@@ -44,7 +45,6 @@
   <body>
     <h1>Toronto Parking Tickets by Weekday in 2012</h1>             <!-- NEW -->
     <div id="chart"></div>
-    <script src="https://d3js.org/d3.v3.min.js"></script>
     <script>
       (function(d3) {
         'use strict';
@@ -77,7 +77,7 @@
           .attr('class', 'count');
         tooltip.append('div')
           .attr('class', 'percent');
-        d3.csv('weekdays.csv', function(error, dataset) {
+        d3.csv("https://bioinformatics73.github.io/Bluemix-IoT-Visualizations/data/csv/weekdays.csv", function(error, dataset) {
           dataset.forEach(function(d) {
             d.count = +d.count;
             d.enabled = true;                                         // NEW
