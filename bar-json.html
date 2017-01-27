@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>d3.js Visualization</title>
+		<!--  <script src="https://d3js.org/d3.v4.min.js"></script>  -->
+		<script src="https://d3js.org/d3.v3.min.js"></script>
+		<link rel="stylesheet" media="all" 
+				href="https://bioinformatics73.github.io/Bluemix-IoT-Visualizations/css/styles.css" />
+		<style>
+			.bar{ fill: steelblue; }
+	  		.bar:hover{ fill: brown; }
+			.axis { font: 10px sans-serif; }
+			.axis path,
+			.axis line { fill: none; stroke: #000; shape-rendering: crispEdges; }
+		</style>
+	</head>
+
+<body>
+	<div id="pagewrap">
+		<header><h1>d3.js Data Visualization Demo</h1></header>
+					
+			<script>
+			// document.getElementById("content").innerHTML;
+			// function barChart( {		
+			
+			// set the dimensions of the canvas
+			var margin = {top: 20, right: 20, bottom: 70, left: 40},
+			    width = 600 - margin.left - margin.right,
+			    height = 300 - margin.top - margin.bottom;
+		
+		
+			// set the ranges
+			var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+			//var x = d3.scaleBand().round([0, width], .05);
+		
+			var y = d3.scale.linear().range([height, 0]);
+			// var y = d3.scaleLinear().range([height, 0]);
+		
+			// define the axis
+			var xAxis = d3.svg.axis()
+			    .scale(x)
+			    .orient("bottom")
+
+			var yAxis = d3.svg.axis()
+			    .scale(y)
+			    .orient("left")
+			    .ticks(10);
+			
+				// var xAxis = d3.axisBottom()
+		   		// .scale(x);
+			
+				// var yAxis = d3.axisLeft()
+			    // .scale(y)
+			    // .ticks(10);
+		
+			// Define tooltip
+			/* var tooltip = d3.select("body")
+					.append("div")	
+					.style("position", "absolute")
+					.style("z-index", "10")
+					.style("visibility", "hidden")
+				    .style("opacity", 0)
+				    .text("a simple tooltip"); */
+			
+			// add the SVG element
+			var svg = d3.select("body").append("svg")
+			    .attr("width", width + margin.left + margin.right)
+			    .attr("height", height + margin.top + margin.bottom)
+			  .append("g")
+			    .attr("transform", 
+			          "translate(" + margin.left + "," + margin.top + ")");
+		
+		
+			// load the data
+			d3.json("data/json/us.json", function(error, data) {
+		
+			    data.forEach(function(d) {
+			        d.year = d.year;
+			        d.barrels = +d.barrels;
+			    });
+				
+			  // scale the range of the data
+			  x.domain(data.map(function(d) { return d.year; }));
+			  y.domain([0, d3.max(data, function(d) { return d.barrels; })]);
+		
+			  // add axis
+			  svg.append("g")
+			      .attr("class", "x axis")
+			      .attr("transform", "translate(0," + height + ")")
+			      .call(xAxis)
+			    .selectAll("text")
+			      .style("text-anchor", "end")
+			      .attr("dx", "-.8em")
+			      .attr("dy", "-.55em")
+			      .attr("transform", "rotate(-90)" );
+		
+			  svg.append("g")
+			      .attr("class", "y axis")
+			      .call(yAxis)
+			    .append("text")
+			      .attr("transform", "rotate(-90)")
+			      .attr("y", 5)
+			      .attr("dy", ".71em")
+			      .style("text-anchor", "end")
+			      .text("Barrels");
+		
+		
+			  // Add bar chart
+			  svg.selectAll("bar")
+			      .data(data)
+			    .enter().append("rect")
+			      .attr("class", "bar")
+			      .attr("x", function(d) { return x(d.year); })
+			      .attr("width", x.rangeBand())
+			      // .attr("width", x.bandwidth())
+						      /* .text( function(d) { return d.barrels; })
+						      .on("mouseover", function(d) {		
+						            div.transition()		
+						                .duration(200)		
+						                .style("opacity", .9); })
+						      .on("mouseout", function(d) {		
+						            div.transition()		
+						                .duration(500)		
+						                .style("opacity", 0); })*/
+			      .attr("y", function(d) { return y(d.barrels); })
+			      .attr("height", function(d) { return height - y(d.barrels); });
+		
+			});
+				
+			</script>
+
+		<!-- 
+			<section id="content" ><h2>Bar Chart w/JSON</h2></section>
+			<section id="middle"><h2>Pie Chart</h2></section>
+			<aside id="sidebar"><h2>Donut Graphic</h2></aside>
+			 
+			<footer>
+				<h4>IBM</h4>
+				<p>Carla Kinley-Davis</p>
+			</footer>
+		-->
+	</div>
+	
+</body>
+</html>
+
+
+	
+
+
