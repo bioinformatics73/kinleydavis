@@ -55,13 +55,13 @@
 			    // .ticks(10);
 		
 			// Define tooltip
-			var tooltip = d3.select("body")
-				.append("div")	
-				.style("position", "absolute")
-				.style("z-index", "10")
-				.style("visibility", "hidden")
-			    .style("opacity", 0)
-			    .text("a simple tooltip");
+			/* var tooltip = d3.select("body")
+					.append("div")	
+					.style("position", "absolute")
+					.style("z-index", "10")
+					.style("visibility", "hidden")
+				    .style("opacity", 0)
+				    .text("a simple tooltip"); */
 			
 			// add the SVG element
 			var svg = d3.select("body").append("svg")
@@ -114,15 +114,15 @@
 			      .attr("x", function(d) { return x(d.year); })
 			      .attr("width", x.rangeBand())
 			      // .attr("width", x.bandwidth())
-			      .text( function(d) { return d.barrels; })
-			      .on("mouseover", function(d) {		
-			            div.transition()		
-			                .duration(200)		
-			                .style("opacity", .9); })
-			      .on("mouseout", function(d) {		
-			            div.transition()		
-			                .duration(500)		
-			                .style("opacity", 0); })
+						      /* .text( function(d) { return d.barrels; })
+						      .on("mouseover", function(d) {		
+						            div.transition()		
+						                .duration(200)		
+						                .style("opacity", .9); })
+						      .on("mouseout", function(d) {		
+						            div.transition()		
+						                .duration(500)		
+						                .style("opacity", 0); })*/
 			      .attr("y", function(d) { return y(d.barrels); })
 			      .attr("height", function(d) { return height - y(d.barrels); });
 		
