@@ -5,7 +5,8 @@
 		<title>d3.js Visualization</title>
 		<!--  <script src="https://d3js.org/d3.v4.min.js"></script>  -->
 		<script src="https://d3js.org/d3.v3.min.js"></script>
-		<link rel="stylesheet" media="all" href="css/styles.css" />
+		<link rel="stylesheet" media="all" 
+				href="https://bioinformatics73.github.io/Bluemix-IoT-Visualizations/css/styles.css" />
 		<style>
 			.bar{ fill: steelblue; }
 	  		.bar:hover{ fill: brown; }
@@ -29,10 +30,11 @@
 		
 		
 			// set the ranges
-			//var x = d3.scaleBand().round([0, width], .05);
 			var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+			//var x = d3.scaleBand().round([0, width], .05);
 		
-			var y = d3.scaleLinear().range([height, 0]);
+			var y = d3.scale.linear().range([height, 0]);
+			// var y = d3.scaleLinear().range([height, 0]);
 		
 			// define the axis
 			var xAxis = d3.svg.axis()
