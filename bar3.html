@@ -52,13 +52,13 @@
 	d3.json("data/json/us.json", function(error, data) {
 
 	    data.forEach(function(d) {
-	        d.year = d.year;
-	        d.barrels = +d.barrels;
+	        d.Letter = d.Letter;
+	        d.Freq = +d.Freq;
 	    });
 		
 	  // scale the range of the data
-	  x.domain(data.map(function(d) { return d.year; }));
-	  y.domain([0, d3.max(data, function(d) { return d.barrels; })]);
+	  x.domain(data.map(function(d) { return d.Letter; }));
+	  y.domain([0, d3.max(data, function(d) { return d.Freq; })]);
 
 	  // add axis
 	  svg.append("g")
@@ -79,7 +79,7 @@
 	      .attr("y", 5)
 	      .attr("dy", ".71em")
 	      .style("text-anchor", "end")
-	      .text("Barrels");
+	      .text("Freq");
 
 
 	  // Add bar chart
@@ -87,11 +87,11 @@
 	      .data(data)
 	    .enter().append("rect")
 	      .attr("class", "bar")
-	      .attr("x", function(d) { return x(d.year); })
+	      .attr("x", function(d) { return x(d.Letter); })
 	      //.attr("width", x.rangeBand())
 	      .attr("width", x.bandwidth())
-	      .attr("y", function(d) { return y(d.barrels); })
-	      .attr("height", function(d) { return height - y(d.barrels); });
+	      .attr("y", function(d) { return y(d.Freq); })
+	      .attr("height", function(d) { return height - y(d.Freq); });
 
 	});
 		
