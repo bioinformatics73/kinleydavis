@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>d3.js Visualization</title>
-		<script src="https://d3js.org/d3.v4.min.js"></script>
+		<!--  <script src="https://d3js.org/d3.v4.min.js"></script>  -->
 		<script src="https://d3js.org/d3.v3.min.js"></script>
 		<link rel="stylesheet" media="all" href="css/styles.css" />
 		<style>
@@ -35,15 +35,21 @@
 			var y = d3.scaleLinear().range([height, 0]);
 		
 			// define the axis
-			var xAxis = d3.axisBottom()
-			    .scale(x);
-			    //.orient("bottom")
-		
-		
-			var yAxis = d3.axisLeft()
+			var xAxis = d3.svg.axis()
+			    .scale(x)
+			    .orient("bottom")
+
+			var yAxis = d3.svg.axis()
 			    .scale(y)
-			    //.orient("left")
+			    .orient("left")
 			    .ticks(10);
+			
+				// var xAxis = d3.axisBottom()
+		   		// .scale(x);
+			
+				// var yAxis = d3.axisLeft()
+			    // .scale(y)
+			    // .ticks(10);
 		
 		
 			// add the SVG element
@@ -56,7 +62,7 @@
 		
 		
 			// load the data
-			d3.json("data/json/us.json", function(error, data) {
+			d3.json("data/json/data.json", function(error, data) {
 		
 			    data.forEach(function(d) {
 			        d.Letter = d.Letter;
@@ -95,8 +101,8 @@
 			    .enter().append("rect")
 			      .attr("class", "bar")
 			      .attr("x", function(d) { return x(d.Letter); })
-			      //.attr("width", x.rangeBand())
-			      .attr("width", x.bandwidth())
+			      .attr("width", x.rangeBand())
+			      // .attr("width", x.bandwidth())
 			      .attr("y", function(d) { return y(d.Freq); })
 			      .attr("height", function(d) { return height - y(d.Freq); });
 		
