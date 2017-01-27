@@ -37,11 +37,19 @@
 
 	/* 	xz array will hold m elements (36), representing the x-values shared by all series (years)
 	    yz array has n elements (3), representing the y-values of each of the n series (Canada, US, Mexico).	*/
-	d3.json("data/json/us.json", function( data ) {    
+	    
+	// d3.json("data/json/us.json", function( data ) {    
+	
+	var data = "data/json/us.json";
+	// var data = "data/csv/us.csv";
+	// var data = "data/xls/us.xlsx";
+	// var data = "data/txt/us.txt";
+	
 	var n = 3, 	
 	    m = 36;	
 	    
-	var xz = d3.range(m),
+	var /* xz = d3.range(m), */
+		xz = d3.scaleLinear().range(m),
 	    yz = d3.range(n).map(function() { return bumps(m); }),
 	    y01z = d3.stack().keys(d3.range(n))(d3.transpose(yz)),
 	    yMax = d3.max(yz, function(y) { return d3.max(y); }),
@@ -162,7 +170,7 @@
 	  return values;
 	}
 	
-	});
+	// });
 	
 	</script>
 
