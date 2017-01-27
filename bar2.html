@@ -54,10 +54,14 @@
 			    // .scale(y)
 			    // .ticks(10);
 		
-			// Define the div for the tooltip
-			var div = d3.select("body").append("div")	
-			    .attr("class", "tooltip")				
-			    .style("opacity", 0);
+			// Define tooltip
+			var tooltip = d3.select("body")
+				.append("div")	
+				.style("position", "absolute")
+				.style("z-index", "10")
+				.style("visibility", "hidden")
+			    .style("opacity", 0)
+			    .text("a simple tooltip");
 			
 			// add the SVG element
 			var svg = d3.select("body").append("svg")
@@ -110,6 +114,7 @@
 			      .attr("x", function(d) { return x(d.year); })
 			      .attr("width", x.rangeBand())
 			      // .attr("width", x.bandwidth())
+			      .text( function(d) { return d.barrels; })
 			      .on("mouseover", function(d) {		
 			            div.transition()		
 			                .duration(200)		
