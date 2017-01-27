@@ -4,7 +4,6 @@
 		<meta charset="utf-8">
 		<title>d3.js Visualization</title>
 		<script src="https://d3js.org/d3.v4.min.js"></script>
-		<script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
 		<style>
 			.bar{ fill: steelblue; }
 	  		.bar:hover{ fill: brown; }
@@ -90,7 +89,8 @@
 	    .enter().append("rect")
 	      .attr("class", "bar")
 	      .attr("x", function(d) { return x(d.year); })
-	      .attr("width", x.rangeBand())
+	      //.attr("width", x.rangeBand())
+	      .attr("width", x.bandwidth())
 	      .attr("y", function(d) { return y(d.barrels); })
 	      .attr("height", function(d) { return height - y(d.barrels); });
 
