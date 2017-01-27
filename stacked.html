@@ -37,7 +37,7 @@
 
 	/* 	xz array will hold m elements (36), representing the x-values shared by all series (years)
 	    yz array has n elements (3), representing the y-values of each of the n series (Canada, US, Mexico).	*/
-	    
+	d3.json("data/json/us.json", function( data ) {    
 	var n = 3, 	
 	    m = 36;	
 	    
@@ -161,6 +161,8 @@
 	
 	  return values;
 	}
+	
+	});
 	
 	</script>
 
