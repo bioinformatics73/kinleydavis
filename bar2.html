@@ -106,6 +106,8 @@
 			      .attr("x", function(d) { return x(d.year); })
 			      .attr("width", x.rangeBand())
 			      // .attr("width", x.bandwidth())
+			      .text(function (d) { return d.year; })
+				  .attr("fill", "white")
 			      .attr("y", function(d) { return y(d.barrels); })
 			      .attr("height", function(d) { return height - y(d.barrels); });
 		
