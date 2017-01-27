@@ -63,8 +63,8 @@ function randomData(){
 //load the data
 d3.json("data/json/us.json", function randomData(error, data) {
     return data.map(function(d) {
-        return { year:d.year, value:d.barrels };
-    });
+        return { year:d.year, value:d.barrels };});
+}
 </script>
 </body>
 </html>
