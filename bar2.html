@@ -16,13 +16,16 @@
 		</style>
 	</head>
 
-<body>
+<body onload="myFunction('barChart')">
 	<div id="pagewrap">
 		<header><h1>d3.js Data Visualization Demo</h1></header>
 		<section id="content"><h2>Bar Chart w/JSON</h2>
 			
 			<script>
-			document.getElementById("content").innerHTML;	
+			// document.getElementById("content").innerHTML;
+			window.onload = function() {
+				myFunction('barChart');
+			
 			// set the dimensions of the canvas
 			var margin = {top: 20, right: 20, bottom: 70, left: 40},
 			    width = 600 - margin.left - margin.right,
@@ -109,6 +112,8 @@
 			      .attr("height", function(d) { return height - y(d.barrels); });
 		
 			});
+			
+			};
 				
 			</script>
 		</section>
