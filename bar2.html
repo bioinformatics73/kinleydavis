@@ -23,7 +23,8 @@
 
 
 	// set the ranges
-	var x = d3.scaleOrdinal().rangeRoundBands([0, width], .05);
+		// var x = d3.scaleOrdinal().rangeRoundBands([0, width], .05);
+	var x = d3.scaleBand().round([0, width], .05);
 
 	var y = d3.scaleLinear().range([height, 0]);
 
