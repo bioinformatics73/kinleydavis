@@ -53,10 +53,18 @@ function changeData(){
 	Donut3D.transition("quotesDonut", randomData(), 130, 100, 30, 0);
 }
 
+/*
 function randomData(){
 	return salesData.map(function(d){ 
 		return {label:d.label, value:1000*Math.random(), color:d.color};});
 }
+*/
+
+//load the data
+d3.json("data/json/us.json", function randomData(error, data) {
+    return data.map(function(d) {
+        return { year:d.year, value:d.barrels };
+    });
 </script>
 </body>
 </html>
