@@ -17,7 +17,6 @@ a img { border: 0; }
 .cl { clear: both; height: 0; line-height: 0; font-size: 0; text-indent: -4000px; }
 .hidden { display: none; }
 .notext { font-size: 0; line-height: 0; text-indent: -4000px; }
-.notext2 { font-size: 12px; text-indent: -4000px; }
 .shell { width: 980px; margin: 0 auto; p}
 
 .box { margin-bottom: 10px; }
