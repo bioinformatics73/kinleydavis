@@ -191,7 +191,7 @@ h1#logo a { display: block; height: 52px; background: url(../images/logo.gif); t
 .red-box h2 span { 
 	display: block; 
 	height: 21px; 
-	background: url(../images/h2-businessintelligence.gif) no-repeat 0 0; 
+	background: url(../images/h2-bioinformatics.gif) no-repeat 0 0; 
 	margin-left: 40px; 
 	position: relative; 
 	top: 15px;
@@ -199,6 +199,7 @@ h1#logo a { display: block; height: 52px; background: url(../images/logo.gif); t
 
 /*
 	Orange Box
+	REMOVED background: url(../images/h2-bluemix.gif) no-repeat 0 0;
 */
 
 .orange-box { background: url(../images/orange-box.gif) no-repeat 0 0; }
@@ -206,7 +207,6 @@ h1#logo a { display: block; height: 52px; background: url(../images/logo.gif); t
 .orange-box h2 span { 
 	display: block;
 	height: 26px;
-	background: url(../images/h2-java.gif) no-repeat 0 0;
 	margin-left:47px;
 	position: relative;
 	top: 15px;
@@ -221,7 +221,7 @@ h1#logo a { display: block; height: 52px; background: url(../images/logo.gif); t
 .green-box h2 span {
 	display: block;
 	height: 26px;
-	background: url(../images/h2-bioinformatics.gif) no-repeat 0 0;
+	background: url(../images/h2-businessintelligence.gif) no-repeat 0 0;
 	margin-left: 48px;
 	position: relative;
 	top: 15px;
