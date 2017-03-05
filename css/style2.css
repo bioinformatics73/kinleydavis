@@ -184,14 +184,14 @@ h1#logo a { display: block; height: 52px; background: url(../images/logo.gif); t
 
 /*
 	Red Box
+	REMOVED background: url(../images/h2-bioinformatics.gif) no-repeat 0 0;
 */
 
 .red-box { background: url(../images/red-box.gif) no-repeat 0 0; }
 .red-box h2 { height: 57px; }
 .red-box h2 span { 
 	display: block; 
-	height: 21px; 
-	background: url(../images/h2-bioinformatics.gif) no-repeat 0 0; 
+	height: 21px;  
 	margin-left: 40px; 
 	position: relative; 
 	top: 15px;
@@ -214,6 +214,7 @@ h1#logo a { display: block; height: 52px; background: url(../images/logo.gif); t
 
 /*
 	Green Box
+	REMOVED background: url(../images/h2-businessintelligence.gif) no-repeat 0 0;
 */
 
 .green-box { background: url(../images/green-box.gif) no-repeat 0 0; }
@@ -221,7 +222,6 @@ h1#logo a { display: block; height: 52px; background: url(../images/logo.gif); t
 .green-box h2 span {
 	display: block;
 	height: 26px;
-	background: url(../images/h2-businessintelligence.gif) no-repeat 0 0;
 	margin-left: 48px;
 	position: relative;
 	top: 15px;
