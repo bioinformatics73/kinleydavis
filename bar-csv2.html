@@ -11,28 +11,12 @@
 	<script src="js/Donut3D.js"></script>
 	
 	<style>
-		.bar{ fill: steelblue; }
-	  	.bar:hover{ fill: brown; }
-		.axis { font: 10px sans-serif; }
-		.axis path,
-		.axis line { fill: none; stroke: #000; shape-rendering: crispEdges; }
-
-		path.slice{
-			stroke-width:2px;
-		}
-		polyline{
-			opacity: .3;
-			stroke: black;
-			stroke-width: 2px;
-			fill: none;
-		} 
-		svg text.percent{
-			fill:white;
-			text-anchor:middle;
-			font-size:12px;
-		}
-
-</style>
+			.bar{ fill: steelblue; }
+	  		.bar:hover{ fill: brown; }
+			.axis { font: 10px sans-serif; }
+			.axis path,
+			.axis line { fill: none; stroke: #000; shape-rendering: crispEdges; }
+		</style>
 
 	<script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -90,26 +74,7 @@
 				<div id="navigation">
 					<ul>
 					    <li><a href="https://bioinformatics73.github.io/Bluemix-IoT-Visualizations/" class="active">Home</a></li>
-					    <!-- 
-							<li><a href="https://bioinformatics73.github.io/Bluemix-IoT-Visualizations/" class="active">Excel</a></li>
-							<li><a href="https://bioinformatics73.github.io/Bluemix-IoT-Visualizations/" class="active">GitHub</a></li>
-							<li><a href="https://bioinformatics73.github.io/Bluemix-IoT-Visualizations/" class="active">Wiki</a></li>
-						 -->
-						 
-						<!--<li><a href="https://bioinformatics73.github.io/Bluemix-IoT-Visualizations/" class="active">Bioinformatics | Statistics (Excel - R)</a></li>-->
-						<!--<li><a href="https://bioinformatics73.github.io/Bluemix-IoT-Visualizations/" class="active">CSS | JS | HTML</a></li>-->
-					    <!--<li><a href="https://bioinformatics73.github.io/Bluemix-IoT-Visualizations/" class="active">Cognos | BusinessObjects | Tableau</a></li>-->
-					    <!--<li><a href="https://bioinformatics73.github.io/Bluemix-IoT-Visualizations/" class="active">Bluemix | IoT | Watson</a></li>-->
-                        <!--<li><a href="http://kinleydaviscom.demo.site.mobi">Mobile</a></li>-->
 					</ul>
-				<!-- 
-					<div id="search">
-						<form action="#" method="post">
-							<input type="text" class="field blink" title="SEARCH" value="SEARCH" />
-							<input type="submit" class="btn notext" value="search" />
-						</form>
-					</div>
-				 -->
 				</div>
 				<!-- END Navigation -->
 				<!-- Content -->
@@ -135,40 +100,89 @@
 							<!-- <a href="#" class="more">Learn more</a> -->
 						</div>
 						
-					  <div class="post">
-					  
-						<script>
-								
-								var salesData=[
-									{label:"Basic", color:"#3366CC"},
-									{label:"Plus", color:"#DC3912"},
-									{label:"Lite", color:"#FF9900"},
-									{label:"Elite", color:"#109618"},
-									{label:"Delux", color:"#990099"}
-								];
-								
-								var svg = d3.select("div").append("svg").attr("width",700).attr("height",300);
-								
-								svg.append("g").attr("id","salesDonut");
-								svg.append("g").attr("id","quotesDonut");
-								
-								Donut3D.draw("salesDonut", randomData(), 150, 150, 130, 100, 30, 0.4);
-								Donut3D.draw("quotesDonut", randomData(), 450, 150, 130, 100, 30, 0);
-									
-								function changeData(){
-									Donut3D.transition("salesDonut", randomData(), 130, 100, 30, 0.4);
-									Donut3D.transition("quotesDonut", randomData(), 130, 100, 30, 0);
-								}
-								
-								function randomData(){
-									return salesData.map(function(d){ 
-										return {label:d.label, value:1000*Math.random(), color:d.color};});
-								}
-								
-						</script>
-					</div>
+					  <div class="post">					  
+						<script>	
+			
+			// set the dimensions of the canvas
+			var margin = {top: 20, right: 20, bottom: 70, left: 40},
+			    width = 600 - margin.left - margin.right,
+			    height = 300 - margin.top - margin.bottom;
+		
+		
+			// set the ranges
+			var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+			//var x = d3.scaleBand().round([0, width], .05);
+		
+			var y = d3.scale.linear().range([height, 0]);
+			// var y = d3.scaleLinear().range([height, 0]);
+		
+			// define the axis
+			var xAxis = d3.svg.axis()
+			    .scale(x)
+			    .orient("bottom")
 
-
+			var yAxis = d3.svg.axis()
+			    .scale(y)
+			    .orient("left")
+			    .ticks(10);
+			
+			// add the SVG element
+			var svg = d3.select("div").append("svg")
+			    .attr("width", width + margin.left + margin.right)
+			    .attr("height", height + margin.top + margin.bottom)
+			  .append("g")
+			    .attr("transform", 
+			          "translate(" + margin.left + "," + margin.top + ")");
+		
+		
+			// load the data
+			d3.csv("data/csv/us.csv", function(error, data) {
+		
+			    data.forEach(function(d) {
+			        d.year = d.year;
+			        d.barrels = +d.barrels;
+			    });
+				
+			  // scale the range of the data
+			  x.domain(data.map(function(d) { return d.year; }));
+			  y.domain([0, d3.max(data, function(d) { return d.barrels; })]);
+		
+			  // add axis
+			  svg.append("g")
+			      .attr("class", "x axis")
+			      .attr("transform", "translate(0," + height + ")")
+			      .call(xAxis)
+			    .selectAll("text")
+			      .style("text-anchor", "end")
+			      .attr("dx", "-.8em")
+			      .attr("dy", "-.55em")
+			      .attr("transform", "rotate(-90)" );
+		
+			  svg.append("g")
+			      .attr("class", "y axis")
+			      .call(yAxis)
+			    .append("text")
+			      .attr("transform", "rotate(-90)")
+			      .attr("y", 5)
+			      .attr("dy", ".71em")
+			      .style("text-anchor", "end")
+			      .text("Barrels");
+		
+		
+			  // Add bar chart
+			  svg.selectAll("bar")
+			      .data(data)
+			    .enter().append("rect")
+			      .attr("class", "bar")
+			      .attr("x", function(d) { return x(d.year); })
+			      .attr("width", x.rangeBand())
+			      .attr("y", function(d) { return y(d.barrels); })
+			      .attr("height", function(d) { return height - y(d.barrels); });
+		
+			});
+				
+			</script>
+						</div>
 					</div>
 
 					<!-- END Column -->
@@ -179,13 +193,6 @@
 							<p><span>Developing cloud and mobile applications using a variety of tools and services.</span></p>
 							<!-- <a href="#" class="more">Learn more</a> -->
 						</div>
-						
-
-
-						
-						
-						
-
 					</div>
 					<!-- END Column -->
 					<div class="cl">&nbsp;</div>
