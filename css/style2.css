@@ -185,14 +185,15 @@ h1#logo a { display: block; height: 52px; background: url(../images/logo.gif); t
 /*
 	Red Box
 	REMOVED background: url(../images/h2-bioinformatics.gif) no-repeat 0 0;
+	REMOVED margin-left: 40px; 
 */
 
 .red-box { background: url(../images/red-box.gif) no-repeat 0 0; }
 .red-box h2 { height: 57px; }
 .red-box h2 span { 
+	text-align: center;
 	display: block; 
-	height: 21px;  
-	margin-left: 40px; 
+	height: 26px;  
 	position: relative; 
 	top: 15px;
 }
@@ -200,14 +201,15 @@ h1#logo a { display: block; height: 52px; background: url(../images/logo.gif); t
 /*
 	Orange Box
 	REMOVED background: url(../images/h2-bluemix.gif) no-repeat 0 0;
+	REMOVED margin-left:47px;
 */
 
 .orange-box { background: url(../images/orange-box.gif) no-repeat 0 0; }
 .orange-box h2 { height: 57px; }
 .orange-box h2 span { 
+	text-align: center;
 	display: block;
 	height: 26px;
-	margin-left:47px;
 	position: relative;
 	top: 15px;
 }
@@ -215,14 +217,15 @@ h1#logo a { display: block; height: 52px; background: url(../images/logo.gif); t
 /*
 	Green Box
 	REMOVED background: url(../images/h2-businessintelligence.gif) no-repeat 0 0;
+	REMOVED margin-left: 48px;
 */
 
 .green-box { background: url(../images/green-box.gif) no-repeat 0 0; }
 .green-box h2 { height: 57px; }
 .green-box h2 span {
+	text-align: center;
 	display: block;
 	height: 26px;
-	margin-left: 48px;
 	position: relative;
 	top: 15px;
 }
@@ -236,15 +239,16 @@ h1#logo a { display: block; height: 52px; background: url(../images/logo.gif); t
 .latest-news .latest-top { background: url(../images/latest-news-top.gif) no-repeat 0 top; padding: 7px; }
 
 .latest-news h2 { 
-	font: 22px/22px "Trebuchet MS", Arial, sans-serif;
+	font: 20px/20px "Trebuchet MS", Arial, sans-serif;
 	color: #404040; 
 	margin-bottom: 10px; 
 	padding-left: 10px; 
 }
 
+/* REMOVED background: url(../images/latest-news-separator.gif) repeat-x 0 bottom;*/
+
 .latest-news .news { 
-	padding: 10px 5px; 
-	background: url(../images/latest-news-separator.gif) repeat-x 0 bottom; 
+	padding: 10px 5px; 	 
 	margin: 0 5px; 
 }
 
