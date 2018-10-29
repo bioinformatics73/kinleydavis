@@ -1,0 +1,2 @@
+<link rel="alternate" media="only screen and (max-width: 640px)" href="http://kinleydaviscom.demo.site.mobi"/>
+<script type="text/javascript" src="http://detect.deviceatlas.com/redirect.js?m=http://kinleydaviscom.demo.site.mobi"></script>
