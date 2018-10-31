@@ -1,157 +1,250 @@
-var xmlns = "http://www.w3.org/2000/svg",
-  xlinkns = "http://www.w3.org/1999/xlink",
-select = function(s) {
-    return document.querySelector(s);
-  },
-  selectAll = function(s) {
-    return document.querySelectorAll(s);
-  },
-  dot = select('#dot'),
-  flameMask = select('#flameMask'),
-  flameGroup = select('.flameGroup'),
-  pContainer = select('.pContainer'),
-    mainTl = new TimelineMax()
+    $(".halloween").lettering();
 
-TweenMax.set('svg', {
-  visibility: 'visible'
-})
 
-TweenMax.set(pContainer, {
-  x:20,
-  y: 15,
-  transformOrigin: '50% 50%'
-})
-var tl = new TimelineMax({});
-tl.from('.wholePumpkin',1, {
- y:-500,
- ease:Power3.easeIn
-})
+// Forked from https://codepen.io/mosne/pen/lkfwt
+"use strict";
+window.onload = function() {
+    setTimeout(start, 200);
+};
 
-.to('.wholePumpkin',0.7, {
- rotation:-12,
- transformOrigin:'50% 70%',
- ease:Power3.easeOut
-},'-=0')
-.to('.wholePumpkin',0.973, {
- rotation:0,
- ease:Sine.easeInOut
-},'-=0.3')
+function start() {
 
-.to('.pumpkinCover', 3, {
- alpha:0,
- onStart:createParticles,
- ease: RoughEase.ease.config({
-      template: Power0.easeNone,
-      strength: 1,
-      points: 50,
-      taper: "none",
-      randomize: true,
-      clamp: false
-    })
-},'-=0')
-.staggerFrom(['.topTextGroup', '.botTextGroup'], 1, {
- alpha:0,
- ease:RoughEase.ease.config({
-      template: Power0.easeNone,
-      strength: 1,
-      points: 50,
-      taper: "none",
-      randomize: true,
-      clamp: false
-    })
-},0.6,'-=2')
+    //Helpers
+    function lineToAngle(x1, y1, length, radians) {
+        var x2 = x1 + length * Math.cos(radians),
+            y2 = y1 + length * Math.sin(radians);
+        return { x: x2, y: y2 };
+    }
 
-function createParticles(){
- 
-var i = 100,  p;
-while (--i > -1) {
-  p = dot.cloneNode(true)
-  pContainer.appendChild(p);
-  //p.setAttributeNS(xlinkns, "xlink:href", '#dot');
+    function randomRange(min, max) {
+        return min + Math.random() * (max - min);
+    }
 
-  //set the particles' transform origin to be in the middle
-  TweenMax.set(p, {
-    transformOrigin: '50% 50%',
-    x: randomBetween(-26, -20),
-    y: randomBetween(80, 90)
-  })
+    function degreesToRads(degrees) {
+        return degrees / 180 * Math.PI;
+    }
 
-  var particleTl = new TimelineMax({});
-  particleTl.to(p, randomBetween(1, 4), {
-    physics2D: {
-      velocity: randomBetween(10, 30),
-      angle: randomBetween(-90, -80),
-      gravity: 0
-    },
+    //Particle
+    var particle = {
+        x: 0,
+        y: 0,
+        vx: 0,
+        vy: 0,
+        radius: 0,
 
-    scale: 0.58,
-    repeat: -1
-  });
+        create: function(x, y, direction) {
+            var obj = Object.create(this);
+            obj.x = x;
+            obj.y = y;
 
-  mainTl.add(particleTl, i / 20)
+            return obj;
+        },
+
+        getSpeed: function() {
+            return Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+        },
+
+        setSpeed: function(speed) {
+            var heading = this.getHeading();
+            this.vx = Math.cos(heading) * speed;
+            this.vy = Math.sin(heading) * speed;
+        },
+
+        getHeading: function() {
+            return Math.atan2(this.vy, this.vx);
+        },
+
+        setHeading: function(heading) {
+            var speed = this.getSpeed();
+            this.vx = Math.cos(heading) * speed;
+            this.vy = Math.sin(heading) * speed;
+        },
+
+        update: function() {
+            this.x += this.vx;
+            this.y += this.vy;
+        }
+    };
+
+    //Canvas and settings
+    var canvas = document.getElementById("starfield"),
+        context = canvas.getContext("2d"),
+        width = canvas.width = window.innerWidth,
+        height = canvas.height = window.innerHeight,
+        stars = [],
+        shootingStars = [],
+        layers = [
+            { speed: 0.00, scale: 0.2, count: 320 },
+            { speed: 0.00, scale: 0.5, count: 50 },
+            { speed: 0.00, scale: 0.75, count: 10 }
+        ],
+        starsAngle = 145,
+        shootingStarSpeed = {
+            min: 15,
+            max: 20
+        },
+        shootingStarOpacityDelta = 0.01,
+        trailLengthDelta = 0.01,
+        shootingStarEmittingInterval = 2000,
+        shootingStarLifeTime = 500,
+        maxTrailLength = 300,
+        starBaseRadius = 2,
+        shootingStarRadius = 3,
+        paused = false;
+
+    //Create all stars
+    for (var j = 0; j < layers.length; j += 1) {
+        var layer = layers[j];
+        for (var i = 0; i < layer.count; i += 1) {
+            var star = particle.create(randomRange(0, width), randomRange(0, height), 0, 0);
+            star.radius = starBaseRadius * layer.scale;
+            star.setSpeed(layer.speed);
+            star.setHeading(degreesToRads(starsAngle));
+            stars.push(star);
+        }
+    }
+
+    function createShootingStar() {
+        var shootingStar = particle.create(randomRange(width / 2, width), randomRange(0, height / 2), 0, 0);
+        shootingStar.setSpeed(randomRange(shootingStarSpeed.min, shootingStarSpeed.max));
+        shootingStar.setHeading(degreesToRads(starsAngle));
+        shootingStar.radius = shootingStarRadius;
+        shootingStar.opacity = 0;
+        shootingStar.trailLengthDelta = 0;
+        shootingStar.isSpawning = true;
+        shootingStar.isDying = false;
+        shootingStars.push(shootingStar);
+    }
+
+    function killShootingStar(shootingStar) {
+        setTimeout(function() {
+            shootingStar.isDying = true;
+        }, shootingStarLifeTime);
+    }
+
+    function update() {
+        if (!paused) {
+            context.clearRect(0, 0, width, height);
+            context.fillStyle = "transparent";
+            context.fillRect(0, 0, width, height);
+            context.fill();
+
+            for (var i = 0; i < stars.length; i += 1) {
+                var star = stars[i];
+                star.update();
+                drawStar(star);
+                if (star.x > width) {
+                    star.x = 0;
+                }
+                if (star.x < 0) {
+                    star.x = width;
+                }
+                if (star.y > height) {
+                    star.y = 0;
+                }
+                if (star.y < 0) {
+                    star.y = height;
+                }
+            }
+
+            for (i = 0; i < shootingStars.length; i += 1) {
+                var shootingStar = shootingStars[i];
+                if (shootingStar.isSpawning) {
+                    shootingStar.opacity += shootingStarOpacityDelta;
+                    if (shootingStar.opacity >= 1.0) {
+                        shootingStar.isSpawning = false;
+                        killShootingStar(shootingStar);
+                    }
+                }
+                if (shootingStar.isDying) {
+                    shootingStar.opacity -= shootingStarOpacityDelta;
+                    if (shootingStar.opacity <= 0.0) {
+                        shootingStar.isDying = false;
+                        shootingStar.isDead = true;
+                    }
+                }
+                shootingStar.trailLengthDelta += trailLengthDelta;
+
+                shootingStar.update();
+                if (shootingStar.opacity > 0.0) {
+                    drawShootingStar(shootingStar);
+                }
+            }
+
+            //Delete dead shooting shootingStars
+            for (i = shootingStars.length -1; i >= 0 ; i--){
+                if (shootingStars[i].isDead){
+                    shootingStars.splice(i, 1);
+                }
+            }
+        }
+        requestAnimationFrame(update);
+    }
+
+    function drawStar(star) {
+        context.fillStyle = "rgb(255, 255, 255)";
+        context.beginPath();
+        context.arc(star.x, star.y, star.radius, 0, Math.PI * 2, false);
+        context.fill();
+    }
+
+    function drawShootingStar(p) {
+        var x = p.x,
+            y = p.y,
+            currentTrailLength = (maxTrailLength * p.trailLengthDelta),
+            pos = lineToAngle(x, y, -currentTrailLength, p.getHeading());
+
+        context.fillStyle = "rgba(255, 255, 255, " + p.opacity + ")";
+        // context.beginPath();
+        // context.arc(x, y, p.radius, 0, Math.PI * 2, false);
+        // context.fill();
+        var starLength = 5;
+        context.beginPath();
+        context.moveTo(x - 1, y + 1);
+
+        context.lineTo(x, y + starLength);
+        context.lineTo(x + 1, y + 1);
+
+        context.lineTo(x + starLength, y);
+        context.lineTo(x + 1, y - 1);
+
+        context.lineTo(x, y + 1);
+        context.lineTo(x, y - starLength);
+
+        context.lineTo(x - 1, y - 1);
+        context.lineTo(x - starLength, y);
+
+        context.lineTo(x - 1, y + 1);
+        context.lineTo(x - starLength, y);
+
+        context.closePath();
+        context.fill();
+
+        //trail
+        context.fillStyle = "rgba(255, 221, 157, " + p.opacity + ")";
+        context.beginPath();
+        context.moveTo(x - 1, y - 1);
+        context.lineTo(pos.x, pos.y);
+        context.lineTo(x + 1, y + 1);
+        context.closePath();
+        context.fill();
+    }
+
+    //Run
+    update();
+
+    //Shooting stars
+    setInterval(function() {
+        if (paused) return;
+        createShootingStar();
+    }, shootingStarEmittingInterval);
+
+    window.onfocus = function () {
+      paused = false;
+    };
+
+    window.onblur = function () {
+      paused = true;
+    };
 
 }
-
-mainTl.seek(0).timeScale(6) ;
- 
- innerLightFlicker();
- 
- //ScrubGSAPTimeline(mainTl)
-}
-
-function innerLightFlicker() {
-
-  TweenMax.to('.lanternTop', randomBetween(12, 19) / 10, {
-    stopColor: '#741B16',
-    repeat: 1,
-    ease: RoughEase.ease.config({
-      template: Power0.easeNone,
-      strength: 3,
-      points: 10,
-      taper: "none",
-      randomize: true,
-      clamp: false
-    }),
-    onRepeat: innerLightFlicker
-  })
-
-  TweenMax.to('.depthGradMid', 0.6, {
-    stopColor: '#B24A1D',
-    repeat: 1,
-    ease: RoughEase.ease.config({
-      template: Power0.easeNone,
-      strength: 3,
-      points: 2,
-      taper: "none",
-      randomize: true,
-      clamp: false
-    }),
-    yoyo: true
-  })
-  
-  TweenMax.to('#pumpkinBgGrad', 0.2,{
-   attr:{
-    cy:randomBetween(330, 360)
-   },    
-   ease: RoughEase.ease.config({
-      template: Power0.easeNone,
-      strength: 1,
-      points: 2,
-      taper: "none",
-      randomize: false,
-      clamp: false
-    }),
-  })
-
-}
-
-//createParticles();
-//innerLightFlicker();
-
-
-
-function randomBetween(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-//TweenMax.globalTimeScale(0.5)
