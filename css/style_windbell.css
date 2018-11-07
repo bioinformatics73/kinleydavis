@@ -1,0 +1,12 @@
+html, body { 
+  height: 100%; 
+  margin: 0; 
+  overflow: hidden; 
+}
+body {
+  background: transparent;
+  /*background: #18173C;*/
+  display: flex;
+  justify-content: left;
+  /*justify-content: center;*/
+}
