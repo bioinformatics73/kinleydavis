@@ -42,3 +42,10 @@ if ($('#back-to-top').length) {
     }, 700);
   });
 }
+
+/* Logo */
+$(document).ready(function(){
+	$('body').click(function(){
+		$(this).toggleClass('layered');
+	});
+});
