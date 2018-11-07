@@ -44,8 +44,10 @@ if ($('#back-to-top').length) {
 }
 
 /* Logo */
+/*
 $(document).ready(function(){
 	$('body').click(function(){
 		$(this).toggleClass('layered');
 	});
 });
+*/
